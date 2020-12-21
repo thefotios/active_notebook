@@ -1,0 +1,30 @@
+#!/usr/bin/env ruby
+require 'bundler/setup'
+require 'pathname'
+require 'active_notebook'
+
+require 'pry'
+
+# TODO: Fail if not found
+iruby_path = Pathname.new(Gem.bindir).join('iruby')
+boot_path = Gem.find_latest_files('active_notebook/boot')[0]
+
+kernel_spec = <<EOM
+{
+  "argv": [
+    "#{iruby_path}",
+    "kernel",
+    "{connection_file}",
+    "#{boot_path}"
+  ],
+  "display_name": "ActiveNotebook",
+  "language": "ruby"
+}
+EOM
+
+binding.pry
+
+puts "done"
+
+__END__
+
