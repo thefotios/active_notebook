@@ -1,24 +1,38 @@
 # ActiveNotebook
 
-```
-bundle add --group jupyter iruby ffi-rzmq awesome_print daru
+## Usage
 
-jupyter kernelspec install $(jupyter kernelspec list --json | jq .kernelspecs.ruby.resource_dir -r) --user --name=foobar
+1. Add to your `Gemfile` and install
 
-{
-  "argv": [
-    "/home/fotios/.asdf/installs/ruby/2.6.5/bin/iruby",
-    "kernel",
-    "{connection_file}",
-    "/home/fotios/notes/kernel.rb"
-  ],
-  "display_name": "Foobar",
-  "language": "ruby"
-}
-```
+    ```shell
+    > cat <<EOM >> Gemfile
+    gem 'active_notebook', github: 'thefotios/active_notebook', branch: 'main'
+    EOM
 
-# IDEAS
+    > bundle install
+    > bundle binstubs active_notebook
+    ```
 
-- Use as a railtie
-- Register kernel itself
-- Can kernels be dynamic?
+1. Add `jupyter` (if you don't already have it installed)
+
+    ```shell
+    > pipenv --python 3.8 install jupyterlab
+    ```
+
+1. Run it
+
+    ```shell
+    > pipenv run bin/active_notebook
+    ```
+
+If you have `jupyter lab` installed some other way, you can omit the `pipenv` commands.
+
+## Development
+
+1. Clone the repo somewhere (eg, `~/src/active_notebook`)
+1. Link into a project
+
+    ```shell
+    > bundle config local.active_notebook ~/src/active_notebook
+    > bundle install
+    ```
