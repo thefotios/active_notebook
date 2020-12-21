@@ -7,7 +7,7 @@ module ActiveNotebook
   module Plugins
     module Display
       module AwesomePrint
-        extend ActiveSupport::Concern
+        extend ::ActiveSupport::Concern
 
         included do
           match do |obj|
@@ -17,7 +17,7 @@ module ActiveNotebook
             )
           end
           format 'text/plain' do |obj|
-            AwesomePrint::Formatter.new(AwesomePrint::Inspector.new).format(obj)
+            ::AwesomePrint::Formatter.new(::AwesomePrint::Inspector.new).format(obj)
           end
 
         ensure

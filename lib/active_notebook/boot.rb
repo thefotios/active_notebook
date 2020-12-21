@@ -11,4 +11,4 @@ module ActiveNotebook
   end
 end
 
-# ActiveNotebook::Boot.run
+ActiveNotebook::Boot.run
