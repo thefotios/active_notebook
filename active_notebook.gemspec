@@ -7,6 +7,10 @@ Gem::Specification.new do |spec|
   spec.version = ActiveNotebook::VERSION
   spec.authors = ['Fotios Lindiakos']
   spec.email = ['fotios.lindiakos@gmail.com']
+  spec.metadata = {
+    "allowed_push_host" => "https://rubygems.pkg.github.com/thefotios",
+    "github_repo" => "ssh://github.com/thefotios/active_notebook",
+  }
 
   spec.summary = 'Write a short summary, because RubyGems requires one.'
   # spec.description   = 'TODO: Write a longer description or delete this line.'
