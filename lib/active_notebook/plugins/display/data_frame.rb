@@ -12,8 +12,11 @@ module ActiveNotebook
           format 'text/html' do |obj|
             ::Daru::DataFrame.from_activerecord(obj).set_index(:id).to_html
           end
+          priority 10
         end
       end
+
+      add(DataFrame)
     end
   end
 end

@@ -5,5 +5,6 @@ git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 # Specify your gem's dependencies in active_notebook.gemspec
 gemspec
 
-
-gem "activerecord", "~> 6.1"
+group :development do
+  gem 'pry'
+end

@@ -12,18 +12,19 @@ module ActiveNotebook
         included do
           match do |obj|
             obj.is_a?(::ActiveRecord::Base) ||
-              obj.is_a?(::ActiveRecord::Relation) || (
+              (obj.is_a?(::ActiveRecord::Relation) && obj.count == 1) || (
               obj.is_a?(Class) && obj.ancestors.include?(::ActiveRecord::Base)
             )
           end
           format 'text/plain' do |obj|
             ::AwesomePrint::Formatter.new(::AwesomePrint::Inspector.new).format(obj)
           end
-
-        ensure
-          puts "Done Loading"
         end
       end
+
+      add(AwesomePrint)
     end
   end
 end
+
+# ActiveNotebook::Plugins::Display.add(ActiveNotebook::Plugins::Display::AwesomePrint)
