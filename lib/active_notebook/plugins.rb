@@ -1,17 +1,16 @@
-require 'iruby'
+module ActiveNotebook::Plugins
+  autoload(:Rails, 'active_notebook/plugins/rails')
+  autoload(:Postgres, 'active_notebook/plugins/postgres')
+  autoload(:Display, 'active_notebook/plugins/display')
 
-require 'active_notebook/plugins/display'
-require 'active_notebook/plugins/display/data_frame'
-require 'active_notebook/plugins/display/awesome_print'
+  class << self
+    def pre_boot
+      Display.call
+    end
 
-module ActiveNotebook
-  module Plugins
-    class << self
-      def load
-        Display.plugins.each do |plugin|
-          IRuby::Display::Registry.include(plugin)
-        end
-      end
+    def post_boot
+      Rails.call
+      Postgres.call
     end
   end
 end

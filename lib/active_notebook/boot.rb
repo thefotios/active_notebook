@@ -1,21 +1,20 @@
-module ActiveNotebook
-  module Boot
-    def self.run
-      require 'iruby'
+require 'pry'
+require 'active_record/type'
 
-      IRuby::Kernel.events.register(:initialized) do |_kernel|
-        require 'active_notebook/kernel'
-        require 'active_record/type'
+class ActiveNotebook::Boot
+  extend AttrExtras.mixin
 
-        ActiveNotebook::Kernel.new(
-          sandbox: ::ActiveRecord::Type::Boolean.new.cast(ENV['SANDBOX'])
-        ).run
-      end
+  method_object
 
-      require 'active_notebook/plugins'
-      ActiveNotebook::Plugins.load
+  def call
+    require 'iruby'
+
+    IRuby::Kernel.events.register(:initialized) do |kernel|
+      kernel.switch_backend!(:pry)
+      ActiveNotebook::Plugins.post_boot
     end
+
+    ActiveNotebook::Plugins.pre_boot
   end
 end
 
-ActiveNotebook::Boot.run

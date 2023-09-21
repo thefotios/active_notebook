@@ -19,12 +19,16 @@ Gem::Specification.new do |spec|
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
-  spec.files = Dir['lib/**/*.rb', 'lib/**/*.rake']
+  spec.files = Dir['lib/**/*.rb', 'lib/**/*.rake', 'bin/**/*.rb']
+
+  spec.bindir        = "bin"
+  spec.executables   = %w[active_notebook]
 
   spec.add_dependency 'activerecord'
   spec.add_dependency 'awesome_print', '~> 1.8'
   spec.add_dependency 'daru'
   spec.add_dependency 'ffi-rzmq'
-  spec.add_dependency 'iruby', '~> 0.7.2'
+  spec.add_dependency 'iruby', '~> 0.7.4'
   spec.add_dependency 'iruby-rails'
+  spec.add_dependency 'attr_extras'
 end
